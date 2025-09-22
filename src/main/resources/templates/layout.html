@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title th:text="${title} ?: 'Category App'">Category App</title>
+
+<!-- CSS từ WebJars -->
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+
+<style>
+body {
+	background: #f8fafc;
+}
+
+header img {
+	max-height: 56px;
+	border-radius: 8px;
+}
+</style>
+</head>
+<body>
+	<header class="bg-white border-bottom sticky-top">
+		<div class="container py-3 d-flex align-items-center gap-3">
+			<img th:src="@{/images/header.jpg}" alt="avatar">
+			<div>
+				<h1 class="h4 m-0">Category Management</h1>
+				<small class="text-secondary">Spring Boot • Thymeleaf • SQL
+					Server</small>
+			</div>
+		</div>
+	</header>
+
+	<main class="container py-4" layout:fragment="content">
+		<!-- Nội dung trang con sẽ được chèn vào đây -->
+	</main>
+
+	<footer class="border-top mt-4">
+		<div class="container py-3" th:replace="fragments/_footer :: footer"></div>
+	</footer>
+
+	<!-- JS từ WebJars: chỉ để 1 lần, ngay trước </body> -->
+	<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

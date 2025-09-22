@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div th:fragment="pager(pageData, q)">
+		<nav class="mt-3">
+			<ul class="pagination mb-0">
+				<li class="page-item"
+					th:classappend="${pageData.first} ? 'disabled'"><a
+					class="page-link"
+					th:href="@{/categories(page=${pageData.number - 1}, q=${q}, size=${pageData.size})}">«</a>
+				</li>
+
+
+				<li class="page-item"
+					th:each="i : ${#numbers.sequence(0, pageData.totalPages - 1)}"
+					th:classappend="${i} == ${pageData.number} ? 'active'"><a
+					class="page-link" th:text="${i + 1}"
+					th:href="@{/categories(page=${i}, q=${q}, size=${pageData.size})}"></a>
+				</li>
+
+
+				<li class="page-item" th:classappend="${pageData.last} ? 'disabled'">
+					<a class="page-link"
+					th:href="@{/categories(page=${pageData.number + 1}, q=${q}, size=${pageData.size})}">»</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</body>
+</html>

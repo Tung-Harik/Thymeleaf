@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<body>
+	<main layout:fragment="content">
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<h2 class="h5 m-0">Danh sách danh mục</h2>
+			<a class="btn btn-primary" th:href="@{/categories/create}">+ Thêm
+				mới</a>
+		</div>
+
+
+		<form class="row g-2 mb-3" method="get" th:action="@{/categories}">
+			<div class="col-auto">
+				<input class="form-control" type="search" name="q"
+					placeholder="Tìm theo tên..." th:value="${q}">
+			</div>
+			<div class="col-auto">
+				<button class="btn btn-outline-secondary" type="submit">Tìm
+					kiếm</button>
+			</div>
+		</form>
+
+
+		<div th:if="${success}" class="alert alert-success"
+			th:text="${success}"></div>
+		<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+
+		<div class="table-responsive bg-white shadow-sm rounded">
+			<table class="table table-striped align-middle m-0">
+				<thead>
+					<tr>
+						<th style="width: 80px">ID</th>
+						<th>Tên</th>
+						<th>Mô tả</th>
+						<th style="width: 180px" class="text-end">Hành động</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="c : ${pageData}">
+						<td th:text="${c.id}"></td>
+						<td th:text="${c.name}"></td>
+						<td th:text="${c.description}"></td>
+						<td class="text-end"><a
+							class="btn btn-sm btn-outline-primary"
+							th:href="@{'/categories/' + ${c.id} + '/edit'}">Sửa</a>
+							<form th:action="@{'/categories/' + ${c.id} + '/delete'}"
+								method="post" class="d-inline"
+								onsubmit="return confirm('Xóa danh mục này?');">
+								<button class="btn btn-sm btn-outline-danger" type="submit">Xóa</button>
+							</form></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<div
+			th:replace="~{category/_pagination :: pager(pageData=${pageData}, q=${q})}"></div>
+	</main>
+</body>
+</html>
