@@ -4,15 +4,16 @@
 	layout:decorate="~{layout}">
 <body>
 	<main layout:fragment="content">
+
 		<div class="d-flex justify-content-between align-items-center mb-3">
 			<h2 class="h5 m-0">Danh sách danh mục</h2>
 			<a class="btn btn-primary" th:href="@{/categories/create}">+ Thêm
 				mới</a>
 		</div>
 
-
+		<!-- form tìm kiếm -->
 		<form class="row g-2 mb-3" method="get" th:action="@{/categories}">
-			<div class="col-auto">
+			<div class="col-sm-4">
 				<input class="form-control" type="search" name="q"
 					placeholder="Tìm theo tên..." th:value="${q}">
 			</div>
@@ -22,20 +23,20 @@
 			</div>
 		</form>
 
-
+		<!-- thông báo -->
 		<div th:if="${success}" class="alert alert-success"
 			th:text="${success}"></div>
 		<div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
 
-
-		<div class="table-responsive bg-white shadow-sm rounded">
-			<table class="table table-striped align-middle m-0">
-				<thead>
+		<!-- bảng dữ liệu -->
+		<div class="table-responsive bg-white rounded shadow-sm">
+			<table class="table table-hover align-middle m-0">
+				<thead class="table-light">
 					<tr>
-						<th style="width: 80px">ID</th>
+						<th style="width: 90px">ID</th>
 						<th>Tên</th>
 						<th>Mô tả</th>
-						<th style="width: 180px" class="text-end">Hành động</th>
+						<th class="text-end" style="width: 180px">Hành động</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,7 +45,7 @@
 						<td th:text="${c.name}"></td>
 						<td th:text="${c.description}"></td>
 						<td class="text-end"><a
-							class="btn btn-sm btn-outline-primary"
+							class="btn btn-sm btn-outline-primary me-1"
 							th:href="@{'/categories/' + ${c.id} + '/edit'}">Sửa</a>
 							<form th:action="@{'/categories/' + ${c.id} + '/delete'}"
 								method="post" class="d-inline"
@@ -52,13 +53,20 @@
 								<button class="btn btn-sm btn-outline-danger" type="submit">Xóa</button>
 							</form></td>
 					</tr>
+
+					<!-- khi không có dữ liệu -->
+					<tr th:if="${#lists.isEmpty(pageData)}">
+						<td colspan="4" class="text-center text-muted py-4">Không có
+							dữ liệu</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
 
-
+		<!-- phân trang -->
 		<div
 			th:replace="~{category/_pagination :: pager(pageData=${pageData}, q=${q})}"></div>
+
 	</main>
 </body>
 </html>

@@ -8,10 +8,10 @@
 	<div th:fragment="footer">
 		<div class="d-flex justify-content-between align-items-center">
 			<span>&copy; <span
-				th:text="${#temporals.format(#dates.createNow(),'yyyy')}"></span> -
-				Category App
-			</span> <span>SV thực hiện: <strong>Họ tên sinh viên</strong> • MSSV:
-				<strong>123456</strong> • Lớp: <strong>IT-ABC</strong></span>
+				th:text="${#temporals.format(#temporals.createNow(), 'yyyy')}"></span>
+				- Category App
+			</span> <span>SV thực hiện: <strong>Nguyễn Minh Tùng</strong> • MSSV:
+				<strong>22110451</strong> • Lớp: <strong>221101IS</strong></span>
 		</div>
 	</div>
 </body>
